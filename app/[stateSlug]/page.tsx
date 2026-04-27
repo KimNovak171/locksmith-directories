@@ -4,17 +4,16 @@ import { FacilityCard } from "@/components/FacilityCard";
 import {
   getDirectoryIndex,
   getHreflangForRegionSlug,
-  getStateResourcesUrl,
   getStateSummary,
 } from "@/lib/stateFacilities";
 import {
-  DEFAULT_TAX_PREPARER_CARE_TYPES_SENTENCE,
+  DEFAULT_LOCKSMITH_CARE_TYPES_SENTENCE,
   DIRECTORY_BRAND_NAME,
   formatCareTypesClause,
-  taxPreparerCategorySchemaThings,
+  locksmithCategorySchemaThings,
 } from "@/lib/careTypesProse";
 
-const siteUrl = "https://taxpreparerdirectories.com";
+const siteUrl = "https://locksmithdirectories.com";
 
 type StatePageProps = {
   params: Promise<{ stateSlug: string }>;
@@ -31,9 +30,9 @@ export async function generateMetadata({
 
   const { stateName, totalFacilities, cities } = await getStateSummary(safeSlug);
 
-  const title = `Tax Preparers in ${stateName} | ${totalFacilities.toLocaleString()} Verified Listings | ${DIRECTORY_BRAND_NAME}`;
+  const title = `Locksmiths in ${stateName} | ${totalFacilities.toLocaleString()} Verified Listings | ${DIRECTORY_BRAND_NAME}`;
 
-  const descriptor = `Browse ${totalFacilities.toLocaleString()} verified tax preparation listings across ${cities.length.toLocaleString()} ${stateName} cities. Find CPAs, enrolled agents, and tax preparers — all rated 3 stars or higher on Google Maps.`;
+  const descriptor = `Browse ${totalFacilities.toLocaleString()} verified locksmith listings across ${cities.length.toLocaleString()} ${stateName} cities. Find residential, commercial, and automotive locksmiths — all rated 3 stars or higher on Google Maps.`;
 
   return {
     title,
@@ -55,7 +54,7 @@ export async function generateMetadata({
           url: "/og-image.svg",
           width: 1200,
           height: 630,
-          alt: `${stateName} tax preparer directory preview`,
+          alt: `${stateName} locksmith directory preview`,
         },
       ],
     },
@@ -78,9 +77,8 @@ export default async function StatePage({ params }: StatePageProps) {
     averageRating,
     careTypes,
   } = await getStateSummary(stateSlug ?? "");
-  const resourcesUrl = getStateResourcesUrl(resolvedStateSlug);
-  const taxServiceFocusText =
-    "tax preparation services, CPAs, enrolled agents, accountants, and bookkeeping support";
+  const locksmithServiceFocusText =
+    "locksmith services, emergency lockouts, rekeying, key cutting, automotive keys, and commercial hardware";
   const majorCities = [...cities]
     .sort((a, b) => b.facilityCount - a.facilityCount)
     .slice(0, 6)
@@ -91,7 +89,7 @@ export default async function StatePage({ params }: StatePageProps) {
   const careTypesSentence =
     careTypes.length > 0
       ? formatCareTypesClause(careTypes, 6).replace(/^including /i, "")
-      : DEFAULT_TAX_PREPARER_CARE_TYPES_SENTENCE;
+      : DEFAULT_LOCKSMITH_CARE_TYPES_SENTENCE;
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -118,7 +116,7 @@ export default async function StatePage({ params }: StatePageProps) {
     mainEntity: [
       {
         "@type": "Question",
-        name: `How many tax preparers are listed in ${stateName}?`,
+        name: `How many locksmiths are listed in ${stateName}?`,
         acceptedAnswer: {
           "@type": "Answer",
           text: `Our directory lists ${totalFacilities.toLocaleString()} verified facilities across ${cities.length.toLocaleString()} cities.`,
@@ -126,7 +124,7 @@ export default async function StatePage({ params }: StatePageProps) {
       },
       {
         "@type": "Question",
-        name: `What types of tax and accounting services appear in ${stateName}?`,
+        name: `What types of locksmith services appear in ${stateName}?`,
         acceptedAnswer: {
           "@type": "Answer",
           text: `${careTypesSentence}.`,
@@ -146,7 +144,7 @@ export default async function StatePage({ params }: StatePageProps) {
   const webpageSchema = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    name: `Tax Preparers in ${stateName}`,
+    name: `Locksmiths in ${stateName}`,
     url: `${siteUrl}/${resolvedStateSlug}`,
     isPartOf: {
       "@type": "WebSite",
@@ -156,9 +154,9 @@ export default async function StatePage({ params }: StatePageProps) {
     about: [
       {
         "@type": "Thing",
-        name: `${stateName} tax preparers`,
+        name: `${stateName} locksmiths`,
       },
-      ...taxPreparerCategorySchemaThings(),
+      ...locksmithCategorySchemaThings(),
     ],
     speakable: {
       "@type": "SpeakableSpecification",
@@ -200,20 +198,12 @@ export default async function StatePage({ params }: StatePageProps) {
           State overview
         </p>
         <h1 className="mt-2 text-3xl font-semibold sm:text-4xl">
-          Tax Preparers in {stateName}
+          Locksmiths in {stateName}
         </h1>
         <p className="mt-3 max-w-2xl text-sm text-foreground/80">
-          Explore {taxServiceFocusText} across {stateName}, including major city areas
-          such as {majorCitiesText}. Use this page to find listings by city, then review{" "}
-          <a
-            href={resourcesUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="underline underline-offset-2 hover:text-gold-soft"
-          >
-            IRS resources for tax professionals
-          </a>{" "}
-          for credentials, due dates, and how to choose a qualified preparer.
+          Explore {locksmithServiceFocusText} across {stateName}, including major city
+          areas such as {majorCitiesText}. Use this page to find listings by city and
+          compare contact details, ratings, and services.
         </p>
 
         <div className="mt-5 grid gap-4 text-sm sm:grid-cols-3">
@@ -276,9 +266,8 @@ export default async function StatePage({ params }: StatePageProps) {
               Listings by city in {stateName}
             </h2>
             <p className="mt-1 max-w-2xl text-sm text-slate-600">
-              Choose a city to browse tax preparers, CPAs, and tax preparation firms in{" "}
-              {stateName}, including individual returns, business taxes, and planning
-              support.
+              Choose a city to browse locksmiths and locksmith services in {stateName},
+              including lockouts, rekeying, key replacement, and access control support.
             </p>
           </div>
           <div className="text-xs text-slate-500">

@@ -8,11 +8,11 @@ import {
 export const metadata: Metadata = {
   title: `Privacy Policy | ${DIRECTORY_BRAND_NAME}`,
   description:
-    `Privacy policy for ${DIRECTORY_BRAND_NAME}. How we collect, use, and protect your information when you use our tax preparer directory.`,
+    `Privacy policy for ${DIRECTORY_BRAND_NAME}. How we collect, use, and protect your information when you use our locksmith directory.`,
   alternates: {
     canonical: "/privacy",
     languages: {
-      "en-us": "https://taxpreparerdirectories.com/privacy",
+      "en-us": "https://locksmithdirectories.com/privacy",
     },
   },
   openGraph: {
@@ -48,8 +48,8 @@ export default function PrivacyPage() {
           <h2 className="text-lg font-semibold text-navy">1. Introduction</h2>
           <p>
             {DIRECTORY_BRAND_NAME} (&quot;we,&quot; &quot;our,&quot; or &quot;us&quot;)
-            operates a directory website that helps clients find and compare tax
-            preparers and tax preparation services across the United States and Canada.
+            operates a directory website that helps clients find and compare
+            locksmiths and locksmith services across the United States.
             This Privacy Policy explains how we collect, use, disclose, and safeguard
             your information when you visit our website.
           </p>
@@ -78,7 +78,7 @@ export default function PrivacyPage() {
             4. Directory Listings and Public Information
           </h2>
           <p>
-            Our directory displays information about tax preparers and firms that we
+            Our directory displays information about locksmiths and locksmith businesses that we
             obtain from public sources (such as Google Maps) or that is provided by
             business owners. Listing details (e.g., name, address, phone, website) are
             shown to help users compare options. If you are a business owner and wish to

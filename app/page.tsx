@@ -1,10 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { FacilityCard } from "@/components/FacilityCard";
-import {
-  getCanadaDirectoryIndex,
-  getCanadaNationwideStats,
-} from "@/lib/canadaFacilities";
 import { getDirectoryIndex, getStateSummary, getGlobalStats } from "@/lib/stateFacilities";
 import {
   DIRECTORY_BRAND_NAME,
@@ -14,8 +10,8 @@ import {
 export async function generateMetadata(): Promise<Metadata> {
   const stats = getGlobalStats();
   const total = stats.totalFacilities.toLocaleString();
-  const title = `Tax Preparer Directory USA & Canada | ${total} verified listings`;
-  const description = `Browse ${total} verified tax preparers and tax preparation listings across the United States and Canada — all rated 3 stars or higher on Google Maps.`;
+  const title = `Locksmith Directory USA | ${total} verified listings`;
+  const description = `Browse ${total} verified locksmiths and locksmith listings across the United States — all rated 3 stars or higher on Google Maps.`;
 
   return {
     title,
@@ -42,10 +38,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Home() {
-  const [usDirectory, canadaDirectory] = await Promise.all([
-    getDirectoryIndex(),
-    getCanadaDirectoryIndex(),
-  ]);
+  const usDirectory = await getDirectoryIndex();
   const usStatesSorted = [...usDirectory].sort((a, b) =>
     a.stateName.localeCompare(b.stateName, "en", { sensitivity: "base" }),
   );
@@ -53,7 +46,6 @@ export default async function Home() {
     usDirectory.map((s) => getStateSummary(s.stateSlug)),
   );
   const globalStats = getGlobalStats();
-  const canadaNationwide = getCanadaNationwideStats();
 
   const breadcrumbSchema = {
     "@context": "https://schema.org",
@@ -63,7 +55,7 @@ export default async function Home() {
         "@type": "ListItem",
         position: 1,
         name: DIRECTORY_BRAND_NAME,
-        item: "https://taxpreparerdirectories.com/",
+        item: "https://locksmithdirectories.com/",
       },
     ],
   };
@@ -79,28 +71,22 @@ export default async function Home() {
           <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
             <div className="space-y-6">
               <p className="inline-flex rounded-full border border-white/25 bg-white/10 px-3 py-1 text-xs font-medium uppercase tracking-[0.2em] text-white backdrop-blur-sm">
-                Tax preparer directories
+                Locksmith directories
               </p>
               <h1 className="text-balance text-3xl font-semibold leading-tight text-white sm:text-4xl lg:text-5xl">
-                Find Trusted Tax Preparers — US States &amp; Canadian Provinces
+                Find Trusted Locksmiths — US States
               </h1>
               <p className="max-w-2xl text-balance text-sm text-white/85 sm:text-base">
-                Verified tax preparers, CPAs, enrolled agents, and tax preparation
-                services across the United States and Canada—browse by state or
-                province, then by city. Every listing rated 3★ or higher on Google Maps.
+                Verified locksmiths and locksmith services—residential, commercial, and
+                automotive—across the United States. Browse by state, then by city.
+                Every listing rated 3★ or higher on Google Maps.
               </p>
 
               <section
                 aria-label="Directory statistics"
                 className="w-full border-t border-white/15 pt-8"
               >
-                <div
-                  className={`grid w-full gap-4 sm:grid-cols-2 ${
-                    canadaNationwide.totalFacilities > 0
-                      ? "lg:grid-cols-5"
-                      : "lg:grid-cols-4"
-                  }`}
-                >
+                <div className="grid w-full gap-4 sm:grid-cols-2 lg:grid-cols-4">
                   <div className="rounded-xl bg-white p-4 text-center shadow-sm">
                     <p className="text-teal text-xs font-semibold uppercase tracking-wide">
                       Verified listings
@@ -108,26 +94,7 @@ export default async function Home() {
                     <p className="mt-2 text-navy text-2xl font-bold">
                       {globalStats.totalFacilities.toLocaleString()}
                     </p>
-                    {canadaNationwide.totalFacilities > 0 && (
-                      <p className="mt-1 text-xs text-navy/70">
-                        US + Canada combined
-                      </p>
-                    )}
                   </div>
-                  {canadaNationwide.totalFacilities > 0 && (
-                    <div className="rounded-xl bg-white p-4 text-center shadow-sm">
-                      <p className="text-teal text-xs font-semibold uppercase tracking-wide">
-                        Canadian listings
-                      </p>
-                      <p className="mt-2 text-navy text-2xl font-bold">
-                        {canadaNationwide.totalFacilities.toLocaleString()}
-                      </p>
-                      <p className="mt-1 text-xs text-navy/70">
-                        {canadaNationwide.provinceCount.toLocaleString()} provinces
-                        &amp; territories
-                      </p>
-                    </div>
-                  )}
                   <div className="rounded-xl bg-white p-4 text-center shadow-sm">
                     <p className="text-teal text-xs font-semibold uppercase tracking-wide">
                       Cities covered
@@ -164,7 +131,7 @@ export default async function Home() {
               Start with a state directory
             </h2>
             <p className="mt-2 text-sm text-navy/90">
-              Browse verified tax preparers by state, then drill down by city to compare
+              Browse verified locksmiths by state, then drill down by city to compare
               services and contact details.
             </p>
 
@@ -194,32 +161,6 @@ export default async function Home() {
         </div>
       </section>
 
-      {canadaDirectory.length > 0 && (
-        <section className="mx-auto max-w-6xl px-4 pt-8 sm:px-6 lg:px-8">
-          <h2 className="text-2xl font-semibold text-teal">
-            Canadian tax preparer directories
-          </h2>
-          <p className="mt-2 text-sm text-navy/80">
-            Browse verified listings by Canadian province. Same directory experience —
-            province by province, then by city.
-          </p>
-          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {canadaDirectory.map((item) => (
-              <Link
-                key={item.provinceSlug}
-                href={`/canada/${item.provinceSlug}`}
-                className="rounded-xl border-2 border-gold bg-surface-muted px-5 py-4 text-left text-navy transition hover:border-teal/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-              >
-                <p className="text-lg font-semibold">{item.provinceName}</p>
-                <p className="mt-1 text-sm text-gold-soft">
-                  {item.provinceName} — {item.totalFacilities.toLocaleString()} listings
-                </p>
-              </Link>
-            ))}
-          </div>
-        </section>
-      )}
-
       {(() => {
         const allFeatured = stateSummaries
           .flatMap((s) => s.facilities)
@@ -232,8 +173,8 @@ export default async function Home() {
               Featured listings
             </h2>
             <p className="mt-1 text-sm text-navy/75">
-              Selected firms across our directories — verified listings for clients
-              comparing tax preparers, CPAs, and tax preparation services.
+              Selected businesses across our directories — verified listings for
+              customers comparing locksmiths and locksmith services.
             </p>
             <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {allFeatured.map((facility) => (
@@ -245,7 +186,7 @@ export default async function Home() {
       })()}
 
       <p className="mx-auto max-w-2xl rounded-lg border-2 border-gold/40 bg-surface px-4 py-3 text-center text-sm text-navy/90">
-        Tax professionals: Get featured at the top of your city listing.{" "}
+        Locksmiths: Get featured at the top of your city listing.{" "}
         <Link
           href="/advertise"
           className="font-medium text-teal underline underline-offset-2 hover:text-teal-soft"
@@ -276,7 +217,7 @@ export default async function Home() {
                 Choose your state
               </h3>
               <p className="mt-2 text-sm text-navy/75">
-                Pick your state to open a full directory of cities and tax preparation
+                Pick your state to open a full directory of cities and locksmith
                 listings.
               </p>
             </div>
@@ -297,11 +238,11 @@ export default async function Home() {
                 3️⃣
               </p>
               <h3 className="mt-3 text-lg font-semibold text-navy">
-                Contact firms directly
+                Contact locksmiths directly
               </h3>
               <p className="mt-2 text-sm text-navy/75">
                 Use website and maps links to verify details and reach out to the
-                preparer or firm you choose.
+                locksmith or business you choose.
               </p>
             </div>
           </div>
@@ -335,8 +276,8 @@ export default async function Home() {
                 Always free to browse
               </h3>
               <p className="mt-2 text-sm text-navy/75">
-                No signup required—helpful information for anyone planning to file taxes
-                or work with a preparer.
+                No signup required—helpful information for anyone planning lock or key
+                work or hiring a locksmith.
               </p>
             </article>
           </div>
@@ -347,12 +288,11 @@ export default async function Home() {
         <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
           <div className="rounded-2xl border border-gold/50 bg-surface p-6 text-navy ring-1 ring-gold/30">
             <h2 className="text-2xl font-semibold text-navy">
-              Are you a tax preparer or firm?
+              Are you a locksmith business?
             </h2>
             <p className="mt-3 max-w-3xl text-sm text-navy/90">
-              Get your practice seen by clients actively searching for tax preparation
-              services, CPAs, and enrolled agents in your city. Featured listings
-              available.
+              Get your business seen by customers actively searching for locksmiths and
+              lock and key services in your city. Featured listings available.
             </p>
             <div className="mt-5">
               <Link

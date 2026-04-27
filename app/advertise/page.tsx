@@ -6,19 +6,19 @@ import {
 } from "@/lib/careTypesProse";
 
 export const metadata: Metadata = {
-  title: "Advertise | Get Your Firm in Front of Clients",
+  title: "Advertise | Get Your Business in Front of Customers",
   description:
-    `Featured and premium listings on ${DIRECTORY_BRAND_NAME}. Reach clients actively searching for tax preparation services, CPAs, and enrolled agents across the United States.`,
+    `Featured and premium listings on ${DIRECTORY_BRAND_NAME}. Reach customers actively searching for locksmith services across the United States.`,
   alternates: {
     canonical: "/advertise",
     languages: {
-      "en-us": "https://taxpreparerdirectories.com/advertise",
+      "en-us": "https://locksmithdirectories.com/advertise",
     },
   },
   openGraph: {
-    title: "Advertise | Get Your Firm in Front of Clients",
+    title: "Advertise | Get Your Business in Front of Customers",
     description:
-      "A featured listing puts your practice at the top of your city directory section in front of visitors comparing tax preparers and tax preparation options.",
+      "A featured listing puts your business at the top of your city directory section in front of visitors comparing locksmith services.",
     url: "/advertise",
     siteName: DIRECTORY_BRAND_NAME,
     type: "website",
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   },
 };
 
-const siteUrl = "https://taxpreparerdirectories.com";
+const siteUrl = "https://locksmithdirectories.com";
 const STRIPE_LINK_FEATURED =
   "https://buy.stripe.com/eVqdR92vU5vx2BM2f7fAc0M";
 const STRIPE_LINK_PREMIUM =
@@ -68,16 +68,15 @@ export default function AdvertisePage() {
 
       <header className="space-y-3">
         <p className="text-xs font-semibold uppercase tracking-[0.2em] text-teal">
-          For tax preparers &amp; firms
+          For locksmiths
         </p>
         <h1 className="text-3xl font-semibold text-navy sm:text-4xl">
-          Get Your Listing in Front of Clients Who Need Tax Help
+          Get Your Listing in Front of Customers Who Need Locksmith Services
         </h1>
         <p className="max-w-3xl text-sm text-slate-600">
-          {DIRECTORY_BRAND_NAME} is visited by individuals and businesses actively
-          searching for tax preparation services, CPAs, and enrolled agents across
-          the United States. A featured or premium listing highlights your practice
-          when prospects compare local options.
+          {DIRECTORY_BRAND_NAME} is visited by people actively searching for locksmiths
+          and lock and key help across the United States. A featured or premium listing
+          highlights your business when prospects compare local options.
         </p>
       </header>
 
@@ -90,7 +89,7 @@ export default function AdvertisePage() {
             Get your business featured at the top of your city directory page on{" "}
             {DIRECTORY_BRAND_NAME}. Your listing appears above standard listings with
             a Featured badge, giving you maximum visibility to customers actively
-            searching for tax preparation services in your area. Cancel anytime.
+            searching for locksmith services in your area. Cancel anytime.
           </p>
           <ul className="mt-4 list-disc space-y-2 pl-5 text-sm text-slate-600">
             <li>Priority placement at the top of your city directory section</li>
@@ -113,14 +112,14 @@ export default function AdvertisePage() {
           </h2>
           <p className="mt-4 text-sm text-slate-600">
             Get everything included in the Featured listing, plus prominent placement
-            in the Featured Tax Preparers section on your state directory page, your
+            in the Featured Locksmiths section on your state directory page, your
             business logo or photo displayed on your listing, and a custom tagline of
             up to 25 words. Cancel anytime.
           </p>
           <ul className="mt-4 list-disc space-y-2 pl-5 text-sm text-slate-600">
             <li>Everything in Featured</li>
-            <li>Featured Tax Preparers section on the state directory page</li>
-            <li>Your firm logo or photo displayed</li>
+            <li>Featured Locksmiths section on the state directory page</li>
+            <li>Your business logo or photo displayed</li>
             <li>Custom tagline (up to 25 words)</li>
             <li>Cancel anytime</li>
           </ul>

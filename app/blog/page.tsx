@@ -6,7 +6,7 @@ import { DIRECTORY_BRAND_NAME } from "@/lib/careTypesProse";
 export const metadata: Metadata = {
   title: "Blog",
   description:
-    `Guides and articles on choosing a tax preparer, understanding deadlines, deductions, and filing tips from ${DIRECTORY_BRAND_NAME}.`,
+    `Guides and articles on choosing a locksmith, understanding lock and key services, and home and business security from ${DIRECTORY_BRAND_NAME}.`,
   alternates: {
     canonical: "/blog",
   },
@@ -43,8 +43,8 @@ export default function BlogIndexPage() {
           Articles &amp; guides
         </h1>
         <p className="max-w-3xl text-sm text-slate-600">
-          Practical tips on finding qualified preparers, organizing documents, and
-          planning ahead for tax season—written for individuals and small businesses.
+          Practical tips on finding qualified locksmiths, comparing quotes, and
+          planning lock and key work—written for homeowners and businesses.
         </p>
       </header>
 

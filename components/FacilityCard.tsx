@@ -40,7 +40,7 @@ function normalizePhoneDisplay(phone: string): string {
 }
 
 /**
- * Google reviews URLs require a place_id. When it is missing (e.g. Canadian listings),
+ * Google reviews URLs require a place_id. When it is missing,
  * use the same address-based Maps search URL as the footer link.
  */
 function resolveGoogleMapsHref(

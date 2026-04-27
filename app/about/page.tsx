@@ -5,11 +5,11 @@ import { DIRECTORY_BRAND_NAME } from "@/lib/careTypesProse";
 export const metadata: Metadata = {
   title: `About This Directory | ${DIRECTORY_BRAND_NAME}`,
   description:
-    `Learn about ${DIRECTORY_BRAND_NAME} — a trusted directory helping clients compare tax preparers, CPAs, enrolled agents, and tax preparation services across the US and Canada.`,
+    `Learn about ${DIRECTORY_BRAND_NAME} — a trusted directory helping people compare locksmiths, lock and key services, and security options across the US.`,
   alternates: {
     canonical: "/about",
     languages: {
-      "en-us": "https://taxpreparerdirectories.com/about",
+      "en-us": "https://locksmithdirectories.com/about",
     },
   },
   openGraph: {
@@ -32,27 +32,27 @@ export default function AboutPage() {
         </h1>
         <p className="max-w-3xl text-sm text-slate-600">
           {DIRECTORY_BRAND_NAME} is a professional, easy-to-use directory that helps
-          clients find and compare tax preparers and tax preparation firms across the
-          United States and Canada.
+          people find and compare locksmiths and locksmith businesses across the
+          United States.
         </p>
       </header>
 
       <div className="mt-10 max-w-3xl space-y-6 text-sm text-slate-700">
         <p>
-          We list verified tax professionals — so you can explore options by state and
-          city, compare contact details and ratings, and make informed decisions. Our
-          listings are sourced from public information and verified where possible; we
-          encourage you to confirm credentials (such as PTIN, CPA license, or enrolled
-          agent status) with the IRS or your state board of accountancy where
-          applicable, and to contact firms directly before engaging services.
+          We list verified locksmith businesses — so you can explore options by state
+          and city, compare contact details and ratings, and make informed decisions.
+          Our listings are sourced from public information and verified where possible;
+          we encourage you to confirm local licensing, insurance, and standing with
+          your state or municipality where applicable, and to contact businesses
+          directly before engaging services.
         </p>
         <p>
           This site is for informational purposes only. We do not endorse any specific
-          preparer or firm. Always verify licensing, bonding, and professional standing
-          with the appropriate regulatory body in your area.
+          locksmith or company. Always verify licensing, bonding, and professional
+          standing with the appropriate regulatory body in your area.
         </p>
         <p>
-          Tax preparers and firms can learn about featured and premium listings on our{" "}
+          Locksmith businesses can learn about featured and premium listings on our{" "}
           <Link href="/advertise" className="font-medium text-teal hover:text-teal-soft">
             Advertise
           </Link>{" "}

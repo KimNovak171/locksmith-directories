@@ -1,34 +1,37 @@
 /**
  * Turn raw Google-style category labels into short phrases for directory prose.
- * Keeps tax preparation, accounting, and related services; drops unrelated map noise.
+ * Keeps locksmith, lock and key, and related services; drops unrelated map noise.
  */
 
-/** Display brand matching production domain taxpreparerdirectories.com */
-export const DIRECTORY_BRAND_NAME = "TaxPreparerDirectories.com";
+/** Display brand matching production domain locksmithdirectories.com */
+export const DIRECTORY_BRAND_NAME = "LocksmithDirectories.com";
 
 /** Support email for listings, advertising, and privacy requests (replaces legacy network addresses). */
 export const DIRECTORY_SUPPORT_EMAIL = "hello@directoriesnetwork.com";
 
 const EXACT_PHRASE: Record<string, string> = {
-  "tax preparation service": "tax preparation services",
-  "tax preparation": "tax preparation services",
-  "tax consultant": "tax consultants",
-  accountant: "accountants",
-  cpa: "CPAs",
-  "certified public accountant": "certified public accountants",
-  "bookkeeping service": "bookkeeping services",
-  "payroll service": "payroll services",
-  "income tax service": "income tax services",
-  "tax service": "tax services",
-  "financial consultant": "financial consultants",
-  "enrolled agent": "enrolled agents",
+  "locksmith service": "locksmith services",
+  "emergency locksmith": "emergency locksmiths",
+  "residential locksmith": "residential locksmiths",
+  "commercial locksmith": "commercial locksmiths",
+  "automotive locksmith": "automotive locksmiths",
+  "key cutting": "key cutting",
+  "key replacement": "key replacement",
+  "lock repair": "lock repair",
+  rekey: "rekeying",
+  "high security lock": "high security locks",
+  "car key": "car keys",
+  "transponder key": "transponder keys",
+  "door lock": "door locks",
+  "master key": "master key systems",
+  "safe service": "safe services",
 };
 
-const TAX_PREPARER_LIKE =
-  /tax|irs|prepar|return|bookkeep|account|cpa|1040|w-2|w2|e-?file|efile|audit\s+represent|payroll|financial\s+plan|notary/i;
+const LOCKSMITH_LIKE =
+  /lock|key|rekey|safe|door|transpond|car\s*key|ignition|padlock|deadbolt|high\s*sec|master\s*key|emergency|residential|commercial|automotive|locksmith/i;
 
-/** Map categories that are clearly not tax or accounting businesses. */
-const NON_TAX =
+/** Map categories that are clearly not locksmith businesses. */
+const NON_LOCKSMITH =
   /tattoo|piercing|body\s*art|salon|barber|plumber|restaurant|gas\s+station|auto\s+repair|church|hotel|gym|dentist|veterinar|nail\s+salon|funeral|coffee|pizza|liquor/i;
 
 function normalizeKey(raw: string): string {
@@ -47,7 +50,7 @@ function humanizeFallback(raw: string): string {
   if (s.endsWith(" center")) {
     return s.replace(/ center$/, " centers");
   }
-  if (s.endsWith("ist") && !/taxonomist$/.test(s)) {
+  if (s.endsWith("ist") && !s.endsWith("onomist")) {
     return `${s}s`;
   }
   if (!s.endsWith("s")) {
@@ -59,9 +62,9 @@ function humanizeFallback(raw: string): string {
 function phraseForLabel(raw: string): string | null {
   const key = normalizeKey(raw);
   if (!key) return null;
-  if (NON_TAX.test(key)) return null;
+  if (NON_LOCKSMITH.test(key)) return null;
   if (EXACT_PHRASE[key]) return EXACT_PHRASE[key];
-  if (!TAX_PREPARER_LIKE.test(raw)) return null;
+  if (!LOCKSMITH_LIKE.test(raw)) return null;
   return humanizeFallback(raw);
 }
 
@@ -90,26 +93,26 @@ export function formatCareTypesClause(
     if (phrases.length >= maxItems) break;
   }
   if (phrases.length === 0) {
-    return "including tax preparation services, tax consultants, CPAs, accountants, bookkeeping services, and payroll services";
+    return "including emergency locksmith, residential locksmith, commercial locksmith, automotive locksmith, key cutting, and lock repair";
   }
   return `including ${oxfordJoin(phrases)}`;
 }
 
-/** Schema.org `Thing` entries for primary tax and accounting categories on this directory. */
-export function taxPreparerCategorySchemaThings(): {
+/** Schema.org `Thing` entries for primary locksmith categories on this directory. */
+export function locksmithCategorySchemaThings(): {
   "@type": "Thing";
   name: string;
 }[] {
   return [
-    { "@type": "Thing", name: "Tax Preparation Service" },
-    { "@type": "Thing", name: "Tax Consultant" },
-    { "@type": "Thing", name: "Certified Public Accountant" },
-    { "@type": "Thing", name: "Accountant" },
-    { "@type": "Thing", name: "Bookkeeping Service" },
-    { "@type": "Thing", name: "Payroll Service" },
+    { "@type": "Thing", name: "Locksmith" },
+    { "@type": "Thing", name: "Residential Locksmith" },
+    { "@type": "Thing", name: "Commercial Locksmith" },
+    { "@type": "Thing", name: "Automotive Locksmith" },
+    { "@type": "Thing", name: "Emergency Locksmith" },
+    { "@type": "Thing", name: "Key Cutting Service" },
   ];
 }
 
 /** Default sentence when no care-type stats exist (FAQ answers, etc.). */
-export const DEFAULT_TAX_PREPARER_CARE_TYPES_SENTENCE =
-  "Tax Preparation Service, Tax Consultant, Certified Public Accountant, Accountant, Bookkeeping Service, Payroll Service";
+export const DEFAULT_LOCKSMITH_CARE_TYPES_SENTENCE =
+  "Locksmith, Residential Locksmith, Commercial Locksmith, Automotive Locksmith, Emergency Locksmith, Key Cutting Service";

@@ -1,8 +1,6 @@
 import type { Facility } from "@/components/FacilityCard";
 import fs from "fs";
 import path from "path";
-import { getCanadaStatsForGlobal } from "@/lib/canadaFacilities";
-
 export type RawFacility = {
   id: string;
   name: string;
@@ -130,24 +128,8 @@ export type StateSummary = {
   careTypes: string[];
 };
 
-const CANADIAN_REGION_SLUGS = new Set([
-  "alberta",
-  "british-columbia",
-  "manitoba",
-  "new-brunswick",
-  "newfoundland-and-labrador",
-  "nova-scotia",
-  "ontario",
-  "prince-edward-island",
-  "quebec",
-  "saskatchewan",
-  "northwest-territories",
-  "nunavut",
-  "yukon",
-]);
-
 /**
- * US state slugs from `data/{slug}_facilities.json`, excluding Canadian province files.
+ * US state slugs from `data/{slug}_facilities.json`.
  * readdir errors yield [] (no hardcoded empty state lists).
  */
 function discoverUsStateFacilitySlugs(): string[] {
@@ -162,7 +144,7 @@ function discoverUsStateFacilitySlugs(): string[] {
   return entries
     .filter((name) => name.endsWith(suffix))
     .map((name) => name.slice(0, -suffix.length))
-    .filter((slug) => slug.length > 0 && !CANADIAN_REGION_SLUGS.has(slug))
+    .filter((slug) => slug.length > 0)
     .sort((a, b) => a.localeCompare(b));
 }
 
@@ -187,14 +169,11 @@ function normalizeStateFacilitiesJson(
   | null {
   if (Array.isArray(parsed)) {
     const facilitiesAll = parsed as AlternateFormatFacilityRaw[];
-    const facilities = facilitiesAll.filter(
-      (f) => (f.country ?? "").toLowerCase() !== "canada",
-    );
-    if (facilities.length === 0) return null;
+    if (facilitiesAll.length === 0) return null;
     const stateName =
-      (facilities[0]?.state ?? "").trim() ||
+      (facilitiesAll[0]?.state ?? "").trim() ||
       fallbackStateNameFromSlug(stateSlug);
-    return { stateName, facilities };
+    return { stateName, facilities: facilitiesAll };
   }
 
   if (parsed && typeof parsed === "object") {
@@ -206,20 +185,17 @@ function normalizeStateFacilitiesJson(
     const facilitiesAll = Array.isArray(obj.facilities)
       ? (obj.facilities as AlternateFormatFacilityRaw[])
       : [];
-    const facilities = facilitiesAll.filter(
-      (f) => (f.country ?? "").toLowerCase() !== "canada",
-    );
-    if (facilities.length === 0) return null;
+    if (facilitiesAll.length === 0) return null;
 
     const stateFromObject =
       typeof obj.state === "string" ? obj.state.trim() : undefined;
 
     const stateName =
       stateFromObject ||
-      (facilities[0]?.state ?? "").trim() ||
+      (facilitiesAll[0]?.state ?? "").trim() ||
       fallbackStateNameFromSlug(stateSlug);
 
-    return { stateName, facilities };
+    return { stateName, facilities: facilitiesAll };
   }
 
   return null;
@@ -512,7 +488,6 @@ export function getGlobalStats(): GlobalStats {
   const usCityKeys = new Set<string>();
   const ratings: number[] = [];
 
-  // US totals from STATE_DATA; Canada added via getCanadaStatsForGlobal() when province JSON exists.
   for (const slug of US_STATE_SLUGS) {
     const facilities = STATE_DATA[slug] ?? [];
     totalFacilities += facilities.length;
@@ -528,10 +503,7 @@ export function getGlobalStats(): GlobalStats {
     }
   }
 
-  const ca = getCanadaStatsForGlobal();
-  totalFacilities += ca.totalFacilities;
-  const totalCities = usCityKeys.size + ca.totalCities;
-  ratings.push(...ca.ratings);
+  const totalCities = usCityKeys.size;
 
   const averageRating =
     ratings.length > 0
@@ -547,14 +519,6 @@ export function getGlobalStats(): GlobalStats {
   };
 }
 
-export function getStateResourcesUrl(stateSlug: string): string {
-  void stateSlug;
-  return "https://www.irs.gov/tax-professionals";
-}
-
-export function getHreflangForRegionSlug(
-  regionSlug: string,
-): "en-us" | "en-ca" {
-  const normalized = (regionSlug ?? "").toLowerCase();
-  return CANADIAN_REGION_SLUGS.has(normalized) ? "en-ca" : "en-us";
+export function getHreflangForRegionSlug(_regionSlug: string): "en-us" {
+  return "en-us";
 }

@@ -1,15 +1,13 @@
 import type { MetadataRoute } from "next";
-import { getCanadaDirectoryIndex } from "@/lib/canadaFacilities";
 import { getDirectoryIndex } from "@/lib/stateFacilities";
 
-const siteUrl = "https://taxpreparerdirectories.com";
+export const dynamic = "force-static";
+
+const siteUrl = "https://locksmithdirectories.com";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
-  const [directory, canadaDirectory] = await Promise.all([
-    getDirectoryIndex(),
-    getCanadaDirectoryIndex(),
-  ]);
+  const directory = await getDirectoryIndex();
 
   const routes: MetadataRoute.Sitemap = [
     {
@@ -17,12 +15,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: now,
       changeFrequency: "daily",
       priority: 1,
-    },
-    {
-      url: `${siteUrl}/canada`,
-      lastModified: now,
-      changeFrequency: "daily",
-      priority: 0.95,
     },
     {
       url: `${siteUrl}/advertise`,
@@ -70,27 +62,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     }
   }
 
-  for (const province of canadaDirectory) {
-    if (!province.provinceSlug) continue;
-    routes.push({
-      url: `${siteUrl}/canada/${province.provinceSlug}`,
-      lastModified: now,
-      changeFrequency: "daily",
-      priority: 0.9,
-    });
-
-    for (const city of province.cities) {
-      if (!city.citySlug) continue;
-      routes.push({
-        url: `${siteUrl}/canada/${province.provinceSlug}/${city.citySlug}`,
-        lastModified: now,
-        changeFrequency: "weekly",
-        priority: 0.8,
-      });
-    }
-  }
-
-
   return routes;
 }
-

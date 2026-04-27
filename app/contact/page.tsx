@@ -13,7 +13,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/contact",
     languages: {
-      "en-us": "https://taxpreparerdirectories.com/contact",
+      "en-us": "https://locksmithdirectories.com/contact",
     },
   },
   openGraph: {
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
   },
 };
 
-const siteUrl = "https://taxpreparerdirectories.com";
+const siteUrl = "https://locksmithdirectories.com";
 
 export default function ContactPage() {
   const breadcrumbSchema = {

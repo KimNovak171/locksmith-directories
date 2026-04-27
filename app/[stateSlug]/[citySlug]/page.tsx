@@ -4,7 +4,7 @@ import { FacilityCard } from "@/components/FacilityCard";
 import {
   DIRECTORY_BRAND_NAME,
   formatCareTypesClause,
-  taxPreparerCategorySchemaThings,
+  locksmithCategorySchemaThings,
 } from "@/lib/careTypesProse";
 import {
   getCityFacilities,
@@ -13,7 +13,7 @@ import {
   getOtherCitiesInState,
 } from "@/lib/stateFacilities";
 
-const siteUrl = "https://taxpreparerdirectories.com";
+const siteUrl = "https://locksmithdirectories.com";
 
 type CityPageProps = {
   params: Promise<{ stateSlug: string; citySlug: string }>;
@@ -32,8 +32,8 @@ export async function generateMetadata({
   const { stateName, cityName, facilities: cityFacilities } =
     await getCityFacilities(safeState, safeCity);
   const count = Array.isArray(cityFacilities) ? cityFacilities.length : 0;
-  const title = `Tax Preparers in ${cityName}, ${stateName} | ${DIRECTORY_BRAND_NAME}`;
-  const description = `Find trusted tax preparers and tax professionals in ${cityName}, ${stateName}—browse ${count.toLocaleString()} verified listings with contact details, maps, and Google ratings so you can choose with confidence.`;
+  const title = `Locksmiths in ${cityName}, ${stateName} | ${DIRECTORY_BRAND_NAME}`;
+  const description = `Find trusted locksmiths in ${cityName}, ${stateName}—browse ${count.toLocaleString()} verified listings with contact details, maps, and Google ratings so you can choose with confidence.`;
 
   return {
     title,
@@ -55,7 +55,7 @@ export async function generateMetadata({
           url: "/og-image.svg",
           width: 1200,
           height: 630,
-          alt: `${cityName}, ${stateName} tax preparer directory preview`,
+          alt: `${cityName}, ${stateName} locksmith directory preview`,
         },
       ],
     },
@@ -133,7 +133,7 @@ export default async function CityPage({ params }: CityPageProps) {
   const webpageSchema = {
     "@context": "https://schema.org",
     "@type": "WebPage",
-    name: `Tax Preparers in ${cityName}, ${stateName}`,
+    name: `Locksmiths in ${cityName}, ${stateName}`,
     url: `${siteUrl}/${stateSlugNorm}/${citySlugNorm}`,
     isPartOf: {
       "@type": "WebSite",
@@ -143,13 +143,13 @@ export default async function CityPage({ params }: CityPageProps) {
     about: [
       {
         "@type": "Thing",
-        name: `${cityName} tax preparers`,
+        name: `${cityName} locksmiths`,
       },
       {
         "@type": "Thing",
-        name: `${stateName} tax preparation listings`,
+        name: `${stateName} locksmith listings`,
       },
-      ...taxPreparerCategorySchemaThings(),
+      ...locksmithCategorySchemaThings(),
     ],
     speakable: {
       "@type": "SpeakableSpecification",
@@ -172,7 +172,7 @@ export default async function CityPage({ params }: CityPageProps) {
           Listings by city
         </p>
         <h1 className="text-3xl font-semibold text-navy">
-          Tax Preparers in {cityName}, {stateName}
+          Locksmiths in {cityName}, {stateName}
         </h1>
         <p className="max-w-2xl text-sm text-slate-600">
           {cityName} has {facilities.length.toLocaleString()} verified listings{" "}
@@ -181,7 +181,7 @@ export default async function CityPage({ params }: CityPageProps) {
         </p>
         <p className="max-w-2xl text-sm text-slate-600">
           Compare firms side by side, review services and contact details, and find the
-          right tax preparer for you in {stateName}.
+          right locksmith for you in {stateName}.
         </p>
       </header>
 

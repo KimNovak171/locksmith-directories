@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Geist, Geist_Mono } from "next/font/google";
-import { getCanadaDirectoryIndex } from "@/lib/canadaFacilities";
 import { getDirectoryIndex } from "@/lib/stateFacilities";
 import { DIRECTORY_BRAND_NAME } from "@/lib/careTypesProse";
 import "./globals.css";
@@ -17,20 +16,20 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://taxpreparerdirectories.com"),
+  metadataBase: new URL("https://locksmithdirectories.com"),
   title: {
-    default: `${DIRECTORY_BRAND_NAME} | Tax Preparer Directory`,
+    default: `${DIRECTORY_BRAND_NAME} | Locksmith Directory`,
     template: `%s | ${DIRECTORY_BRAND_NAME}`,
   },
   description:
-    `${DIRECTORY_BRAND_NAME} is a professional directory helping individuals and businesses find local tax preparers, CPAs, enrolled agents, and tax preparation services across the United States and Canada.`,
+    `${DIRECTORY_BRAND_NAME} is a professional directory helping people and businesses find local locksmiths, lock and key services, and mobile and shop-based help across the United States.`,
   alternates: {
     canonical: "/",
   },
   openGraph: {
-    title: `${DIRECTORY_BRAND_NAME} | Tax Preparer Directory`,
+    title: `${DIRECTORY_BRAND_NAME} | Locksmith Directory`,
     description:
-      "Trusted resource to explore and compare tax preparation services, CPAs, and tax professionals across North America.",
+      "Trusted resource to explore and compare locksmiths, lock and key services, and emergency and scheduled work across the United States.",
     url: "/",
     siteName: DIRECTORY_BRAND_NAME,
     type: "website",
@@ -50,10 +49,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [directory, canadaDirectory] = await Promise.all([
-    getDirectoryIndex(),
-    getCanadaDirectoryIndex(),
-  ]);
+  const directory = await getDirectoryIndex();
 
   return (
     <html lang="en">
@@ -101,12 +97,6 @@ export default async function RootLayout({
                     USA
                   </Link>
                   <Link
-                    href="/canada"
-                    className="text-xs font-medium text-white/90 transition-colors hover:text-gold-soft"
-                  >
-                    Canada
-                  </Link>
-                  <Link
                     href="/blog"
                     className="text-xs font-medium text-white/90 transition-colors hover:text-gold-soft"
                   >
@@ -127,7 +117,7 @@ export default async function RootLayout({
                 </nav>
               </div>
               <p className="ml-4 hidden max-w-xs text-right text-xs text-white/85 sm:block">
-                Trusted tax preparer directory for clients choosing professional help at tax time.
+                Trusted locksmith directory for finding licensed, local locksmith services.
               </p>
             </div>
           </header>
@@ -167,39 +157,6 @@ export default async function RootLayout({
                     </div>
                   </div>
                 ))}
-                {canadaDirectory.length > 0 && (
-                  <>
-                    <div className="space-y-2 border-t border-gold/20 pt-5">
-                      <Link
-                        href="/canada"
-                        className="text-sm font-semibold text-gold-soft hover:text-gold"
-                      >
-                        Canada
-                      </Link>
-                    </div>
-                    {canadaDirectory.map((province) => (
-                      <div key={province.provinceSlug} className="space-y-2">
-                        <Link
-                          href={`/canada/${province.provinceSlug}`}
-                          className="text-sm font-semibold text-gold-soft hover:text-gold"
-                        >
-                          {province.provinceName}
-                        </Link>
-                        <div className="flex flex-wrap gap-x-3 gap-y-1">
-                          {province.cities.map((city) => (
-                            <Link
-                              key={`${province.provinceSlug}-${city.citySlug}`}
-                              href={`/canada/${province.provinceSlug}/${city.citySlug}`}
-                              className="text-[11px] text-white/85 hover:text-gold"
-                            >
-                              {city.cityName}
-                            </Link>
-                          ))}
-                        </div>
-                      </div>
-                    ))}
-                  </>
-                )}
               </div>
             </div>
           </section>
@@ -208,8 +165,8 @@ export default async function RootLayout({
             <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-5 text-xs text-white/80 sm:px-6 lg:px-8">
               <p>
                 © {new Date().getFullYear()} {DIRECTORY_BRAND_NAME}. For
-                informational purposes only – always verify licensing,
-                PTIN or CPA credentials, and any regulatory requirements with the appropriate authority in your area.
+                informational purposes only – always verify licensing and credentials
+                with the appropriate authority in your area.
               </p>
               <div className="flex flex-wrap gap-4">
                 <Link href="/about" className="hover:text-gold">
@@ -225,7 +182,7 @@ export default async function RootLayout({
                   Advertise
                 </Link>
                 <Link href="/advertise" className="hover:text-gold">
-                  For tax preparers &amp; firms
+                  For locksmiths
                 </Link>
                 <Link href="/advertise" className="hover:text-gold">
                   Featured listing
