@@ -16,7 +16,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://locksmithdirectories.com"),
+  metadataBase: new URL("https://locksmithsdirectories.com"),
   title: {
     default: `${DIRECTORY_BRAND_NAME} | Locksmith Directory`,
     template: `%s | ${DIRECTORY_BRAND_NAME}`,

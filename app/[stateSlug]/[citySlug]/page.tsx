@@ -13,7 +13,7 @@ import {
   getOtherCitiesInState,
 } from "@/lib/stateFacilities";
 
-const siteUrl = "https://locksmithdirectories.com";
+const siteUrl = "https://locksmithsdirectories.com";
 
 type CityPageProps = {
   params: Promise<{ stateSlug: string; citySlug: string }>;

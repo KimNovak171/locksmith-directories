@@ -9,7 +9,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/about",
     languages: {
-      "en-us": "https://locksmithdirectories.com/about",
+      "en-us": "https://locksmithsdirectories.com/about",
     },
   },
   openGraph: {

@@ -3,8 +3,8 @@
  * Keeps locksmith, lock and key, and related services; drops unrelated map noise.
  */
 
-/** Display brand matching production domain locksmithdirectories.com */
-export const DIRECTORY_BRAND_NAME = "LocksmithDirectories.com";
+/** Display brand matching production domain locksmithsdirectories.com */
+export const DIRECTORY_BRAND_NAME = "LocksmithsDirectories.com";
 
 /** Support email for listings, advertising, and privacy requests (replaces legacy network addresses). */
 export const DIRECTORY_SUPPORT_EMAIL = "hello@directoriesnetwork.com";

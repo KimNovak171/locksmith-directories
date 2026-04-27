@@ -3,7 +3,7 @@ import { getDirectoryIndex } from "@/lib/stateFacilities";
 
 export const dynamic = "force-static";
 
-const siteUrl = "https://locksmithdirectories.com";
+const siteUrl = "https://locksmithsdirectories.com";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();

@@ -55,7 +55,7 @@ export default async function Home() {
         "@type": "ListItem",
         position: 1,
         name: DIRECTORY_BRAND_NAME,
-        item: "https://locksmithdirectories.com/",
+        item: "https://locksmithsdirectories.com/",
       },
     ],
   };

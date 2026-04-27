@@ -10,6 +10,6 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
       },
     ],
-    sitemap: "https://locksmithdirectories.com/sitemap.xml",
+    sitemap: "https://locksmithsdirectories.com/sitemap.xml",
   };
 }

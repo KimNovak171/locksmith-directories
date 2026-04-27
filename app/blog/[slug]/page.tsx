@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { getPostBySlug, getPostSlugs } from "@/lib/blog";
 import { DIRECTORY_BRAND_NAME } from "@/lib/careTypesProse";
 
-const siteUrl = "https://locksmithdirectories.com";
+const siteUrl = "https://locksmithsdirectories.com";
 
 type BlogPostPageProps = {
   params: Promise<{ slug: string }>;

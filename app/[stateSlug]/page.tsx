@@ -13,7 +13,7 @@ import {
   locksmithCategorySchemaThings,
 } from "@/lib/careTypesProse";
 
-const siteUrl = "https://locksmithdirectories.com";
+const siteUrl = "https://locksmithsdirectories.com";
 
 type StatePageProps = {
   params: Promise<{ stateSlug: string }>;

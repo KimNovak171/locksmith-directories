@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/advertise",
     languages: {
-      "en-us": "https://locksmithdirectories.com/advertise",
+      "en-us": "https://locksmithsdirectories.com/advertise",
     },
   },
   openGraph: {
@@ -33,7 +33,7 @@ export const metadata: Metadata = {
   },
 };
 
-const siteUrl = "https://locksmithdirectories.com";
+const siteUrl = "https://locksmithsdirectories.com";
 const STRIPE_LINK_FEATURED =
   "https://buy.stripe.com/eVqdR92vU5vx2BM2f7fAc0M";
 const STRIPE_LINK_PREMIUM =

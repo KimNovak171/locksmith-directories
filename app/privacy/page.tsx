@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "/privacy",
     languages: {
-      "en-us": "https://locksmithdirectories.com/privacy",
+      "en-us": "https://locksmithsdirectories.com/privacy",
     },
   },
   openGraph: {
