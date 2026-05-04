@@ -8,7 +8,7 @@ import {
 export const metadata: Metadata = {
   title: "Advertise | Get Your Business in Front of Customers",
   description:
-    `Featured and premium listings on ${DIRECTORY_BRAND_NAME}. Reach customers actively searching for locksmith services across the United States.`,
+    `Featured listings on ${DIRECTORY_BRAND_NAME}. Reach customers actively searching for locksmith services across the United States.`,
   alternates: {
     canonical: "/advertise",
     languages: {
@@ -35,9 +35,9 @@ export const metadata: Metadata = {
 
 const siteUrl = "https://locksmithsdirectories.com";
 const STRIPE_LINK_FEATURED =
-  "https://buy.stripe.com/eVqdR92vU5vx2BM2f7fAc0M";
-const STRIPE_LINK_PREMIUM =
-  "https://buy.stripe.com/eVq8wP9YmbTV3FQ6vnfAc0N";
+  "https://buy.stripe.com/bJefZh4E20bdfoyg5XfAc0P";
+const STRIPE_LINK_FEATURED_ANNUAL =
+  "https://buy.stripe.com/dRm14n6Mae23a4e8DvfAc0Q";
 
 export default function AdvertisePage() {
   const breadcrumbSchema = {
@@ -75,8 +75,8 @@ export default function AdvertisePage() {
         </h1>
         <p className="max-w-3xl text-sm text-slate-600">
           {DIRECTORY_BRAND_NAME} is visited by people actively searching for locksmiths
-          and lock and key help across the United States. A featured or premium listing
-          highlights your business when prospects compare local options.
+          and lock and key help across the United States. A featured listing highlights your business when prospects
+          compare local options.
         </p>
       </header>
 
@@ -108,28 +108,29 @@ export default function AdvertisePage() {
         </article>
         <article className="rounded-xl border border-surface-muted bg-surface p-6 shadow-sm">
           <h2 className="text-lg font-semibold text-navy">
-            Premium Listing — $99/month
+            Featured Listing Annual — $397/year
           </h2>
           <p className="mt-4 text-sm text-slate-600">
-            Get everything included in the Featured listing, plus prominent placement
-            in the Featured Locksmiths section on your state directory page, your
-            business logo or photo displayed on your listing, and a custom tagline of
-            up to 25 words. Cancel anytime.
+            Get your business featured at the top of your city directory page on{" "}
+            {DIRECTORY_BRAND_NAME} for a full year. Your listing appears above standard
+            listings with a Featured badge, giving you maximum visibility to customers
+            actively searching for locksmith services in your area. Save $191 compared
+            to monthly billing. Cancel anytime.
           </p>
           <ul className="mt-4 list-disc space-y-2 pl-5 text-sm text-slate-600">
-            <li>Everything in Featured</li>
-            <li>Featured Locksmiths section on the state directory page</li>
-            <li>Your business logo or photo displayed</li>
-            <li>Custom tagline (up to 25 words)</li>
+            <li>Priority placement at the top of your city directory section</li>
+            <li>Featured badge on your listing</li>
+            <li>Included in the Top Picks section on your state page</li>
+            <li>Save $191 compared to monthly billing</li>
             <li>Cancel anytime</li>
           </ul>
           <a
-            href={STRIPE_LINK_PREMIUM}
+            href={STRIPE_LINK_FEATURED_ANNUAL}
             target="_blank"
             rel="noopener noreferrer"
             className="mt-5 inline-flex w-full items-center justify-center rounded-full bg-teal px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-teal-soft focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-teal focus-visible:ring-offset-2"
           >
-            Pay $99/month with Stripe
+            Pay $397/year with Stripe
           </a>
         </article>
       </section>
