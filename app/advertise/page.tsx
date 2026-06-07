@@ -37,7 +37,7 @@ const siteUrl = "https://locksmithsdirectories.com";
 const STRIPE_LINK_FEATURED =
   "https://buy.stripe.com/bJefZh4E20bdfoyg5XfAc0P";
 const STRIPE_LINK_FEATURED_ANNUAL =
-  "https://buy.stripe.com/dRm14n6Mae23a4e8DvfAc0Q";
+  "https://buy.stripe.com/aFa28rday4rt90a06ZfAc0R";
 
 export default function AdvertisePage() {
   const breadcrumbSchema = {
