@@ -237,28 +237,6 @@ export default async function StatePage({ params }: StatePageProps) {
         </div>
       </section>
 
-      {(() => {
-        const featuredFacilities = facilities
-          .filter((f) => f.featured === true || f.premium === true)
-          .slice(0, 3);
-        if (featuredFacilities.length === 0) return null;
-        return (
-          <section className="mt-8 rounded-2xl border-2 border-teal/20 bg-teal/5 p-6 space-y-4">
-            <h2 className="text-sm font-semibold uppercase tracking-[0.18em] text-teal border-b border-teal/40 pb-1 inline-block">
-              Top picks in {stateName}
-            </h2>
-            <p className="text-sm text-slate-600">
-              Featured listings in {stateName} — verified with priority placement.
-            </p>
-            <div className="mt-4 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-              {featuredFacilities.map((facility) => (
-                <FacilityCard key={facility.id} facility={facility} />
-              ))}
-            </div>
-          </section>
-        );
-      })()}
-
       <section className="mt-8 rounded-2xl border-2 border-navy/20 bg-background p-6 space-y-4">
         <div className="flex flex-col gap-2 sm:flex-row sm:items-end sm:justify-between">
           <div>

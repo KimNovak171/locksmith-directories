@@ -94,7 +94,6 @@ export default function AdvertisePage() {
           <ul className="mt-4 list-disc space-y-2 pl-5 text-sm text-slate-600">
             <li>Priority placement at the top of your city directory section</li>
             <li>Featured badge on your listing</li>
-            <li>Included in the Top Picks section on your state page</li>
             <li>Cancel anytime</li>
           </ul>
           <a
@@ -120,7 +119,6 @@ export default function AdvertisePage() {
           <ul className="mt-4 list-disc space-y-2 pl-5 text-sm text-slate-600">
             <li>Priority placement at the top of your city directory section</li>
             <li>Featured badge on your listing</li>
-            <li>Included in the Top Picks section on your state page</li>
             <li>Save $191 compared to monthly billing</li>
             <li>Cancel anytime</li>
           </ul>
