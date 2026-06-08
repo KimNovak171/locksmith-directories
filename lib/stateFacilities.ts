@@ -38,6 +38,7 @@ type AlternateFormatFacilityRaw = {
   rating?: number | null;
   reviews?: number | null;
   place_id?: string | null;
+  mapsUrl?: string | null;
   recommended?: boolean;
   featured?: boolean;
   premium?: boolean;
@@ -70,11 +71,13 @@ function transformAlternateFormatFacilities(
     const addressLine2 =
       addressParts.length > 1 ? addressParts.slice(1).join(", ") : undefined;
     const fullAddress = (f.address ?? "").trim();
-    const mapsUrl = f.place_id
-      ? `https://search.google.com/local/reviews?placeid=${f.place_id}&q=*&authuser=0&hl=en&gl=US`
-      : fullAddress
-        ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(fullAddress)}`
-        : undefined;
+    const mapsUrl = f.mapsUrl
+      ? f.mapsUrl
+      : f.place_id
+        ? `https://search.google.com/local/reviews?placeid=${f.place_id}&q=*&authuser=0&hl=en&gl=US`
+        : fullAddress
+          ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(fullAddress)}`
+          : undefined;
     return {
       id,
       name: (f.name ?? "").trim() || "Unnamed",
