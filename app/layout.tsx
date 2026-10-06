@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Geist, Geist_Mono } from "next/font/google";
-import { getDirectoryIndex } from "@/lib/stateFacilities";
 import { DIRECTORY_BRAND_NAME } from "@/lib/careTypesProse";
 import "./globals.css";
 
@@ -44,12 +43,11 @@ export const metadata: Metadata = {
   },
 };
 
-export default async function RootLayout({
+export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const directory = await getDirectoryIndex();
 
   return (
     <html lang="en">
@@ -124,42 +122,6 @@ export default async function RootLayout({
 
           <main className="flex-1">{children}</main>
 
-          <section
-            className="w-full bg-navy border-t-[3px] border-gold px-4 py-5 text-white/80 sm:px-6 lg:px-8"
-            aria-label="Full state and city directory"
-          >
-            <div className="mx-auto flex max-w-6xl flex-col gap-4">
-              <h2 className="text-sm font-semibold text-white">
-                Full State and City Directory
-              </h2>
-              <p className="text-[11px] text-white/70">
-                Crawlable internal links to every state and city page.
-              </p>
-              <div className="flex flex-col gap-5">
-                {directory.map((state) => (
-                  <div key={state.stateSlug} className="space-y-2">
-                    <Link
-                      href={`/${state.stateSlug}`}
-                      className="text-sm font-semibold text-gold-soft hover:text-gold"
-                    >
-                      {state.stateName}
-                    </Link>
-                    <div className="flex flex-wrap gap-x-3 gap-y-1">
-                      {state.cities.map((city) => (
-                        <Link
-                          key={`${state.stateSlug}-${city.citySlug}`}
-                          href={`/${state.stateSlug}/${city.citySlug}`}
-                          className="text-[11px] text-white/85 hover:text-gold"
-                        >
-                          {city.cityName}
-                        </Link>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
 
           <footer className="w-full bg-navy border-t-[3px] border-gold">
             <div className="mx-auto flex max-w-6xl flex-col gap-4 px-4 py-5 text-xs text-white/80 sm:px-6 lg:px-8">
@@ -174,6 +136,9 @@ export default async function RootLayout({
                 </Link>
                 <Link href="/contact" className="hover:text-gold">
                   Contact
+                </Link>
+                <Link href="/directory" className="hover:text-gold">
+                  Full Directory
                 </Link>
                 <Link href="/privacy" className="hover:text-gold">
                   Privacy &amp; terms
