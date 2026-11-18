@@ -18033,7 +18033,8 @@
       "latitude": 25.8508747,
       "longitude": -80.286082,
       "place_id": "ChIJ2z7sqyS72YgRFRnAeECYhRU",
-      "recommended": true
+      "recommended": true,
+      "featured": true
     },
     {
       "name": "Cruz Locksmith",
