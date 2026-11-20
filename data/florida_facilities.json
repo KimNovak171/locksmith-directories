@@ -18037,6 +18037,22 @@
       "featured": true
     },
     {
+      "name": "Precise Locksmith",
+      "care_type": "Locksmith",
+      "address": "3195 W 2nd Ave, Hialeah, FL 33012",
+      "city": "Miami",
+      "state": "FL",
+      "phone": "+1 786-786-3475",
+      "website": "https://www.preciselocksmithllc.com/",
+      "rating": 5.0,
+      "reviews": 214,
+      "latitude": 25.8508747,
+      "longitude": -80.286082,
+      "place_id": "ChIJ2z7sqyS72YgRFRnAeECYhRU",
+      "recommended": true,
+      "featured": true
+    },
+    {
       "name": "Cruz Locksmith",
       "care_type": "Locksmith",
       "address": "398 E 41st St #2240, Hialeah, FL 33013",
