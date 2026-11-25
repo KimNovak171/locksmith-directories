@@ -1,8 +1,8 @@
 {
   "state": "Missouri",
   "state_code": "MO",
-  "total": 301,
-  "recommended_count": 238,
+  "total": 300,
+  "recommended_count": 237,
   "review_carefully_count": 63,
   "facilities": [
     {
@@ -468,21 +468,6 @@
       "latitude": 38.59321,
       "longitude": -90.22688699999999,
       "place_id": "ChIJ2RRBlnq02IcR0zWTTUvKFws",
-      "recommended": true
-    },
-    {
-      "name": "Woodward Lock & Key",
-      "care_type": "Locksmith",
-      "address": "5225 Dewey Ave, St. Louis, MO 63116",
-      "city": "St. Louis",
-      "state": "MO",
-      "phone": "+1 314-326-9307",
-      "website": "http://woodwardlockandkey.com/",
-      "rating": 5.0,
-      "reviews": 126,
-      "latitude": 38.5726432,
-      "longitude": -90.2557561,
-      "place_id": "ChIJyXOyu0612IcRj5BN1vRIDrU",
       "recommended": true
     },
     {
